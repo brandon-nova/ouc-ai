@@ -10,28 +10,53 @@ MODEL = "gemma2-9b-it"
 st.set_page_config(page_title="search.ouc.com", page_icon="💡", layout="wide")
 
 # Force light theme via CSS variables override
-def apply_light_theme():
-    st.markdown(
-        """
-        <style>
-        :root {
-            --primary-background-color: #FFFFFF !important;
-            --secondary-background-color: #FFFFFF !important;
-            --tertiary-background-color: #FFFFFF !important;
-            --text-color: #000000 !important;
-        }
-        #MainMenu, header, footer {
-            visibility: hidden;
-            height: 0;
-            margin: 0;
-            padding: 0;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+st.markdown(
+    """
+    <style>
+    /* 1) Full-app white */
+    body, [data-testid="stAppViewContainer"], .block-container {
+      background: #fff !important;
+    }
 
-apply_light_theme()
+    /* 2) Center the logo */
+    [data-testid="stImage"] > figure {
+      display: block !important;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+
+    }
+
+    /* 3) Headline blue & centered */
+    .block-container h1 {
+      color: #1a68ba !important;
+      text-align: center;
+    }
+
+    /* 4) Chat area white */
+    [data-testid="stChatMessageList"] {
+      background: #fff !important;
+    }
+
+    /* 5) All chat text in #1a68ba */
+    [data-testid="stChatMessage"] div[data-testid="stMarkdownContainer"] {
+      color: #1a68ba !important;
+    }
+
+    /* 6) (Optional) Input box blue */
+    [data-testid="stChatInput"] textarea {
+      background: #1a68ba !important;
+      color: #fff !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+
+# Display a logo/image above the title (place 'logo.png' in your app folder or use a URL)
+st.image("logo.png", use_container_width=False, width=200)
 st.title("search.ouc.com")
 
 # Initialize chat history in session state
